@@ -125,7 +125,7 @@ printf "update version information...\n"
 version="$(cd "$visSrcPath" && git describe --tags $(git rev-list --tags --max-count=1))"
 version=${version:1}
 printf "using Vis.js version $version\n"
-expr="s/\"version\": \"[^\"]+\"/\"version\": \"$version\"/g"
+expr="s/\"version\": \"[^\"]*\"/\"version\": \"$version\"/g"
 
 sed -i -r -e "$expr" "src/plugin.info"
 
