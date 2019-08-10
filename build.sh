@@ -40,9 +40,9 @@ printf "compile and copy images...\n"
 
 imagesLength=${#images[*]}
 for((i = 0; i < $imagesLength; i++)); do
-  
+
   twImgPrefix="img/${images[i]}"
-  
+
   # replace shash with underscore
   imgName="${twImgPrefix//\//_}.tid";
 
@@ -65,7 +65,7 @@ printf "replace urls...\n"
 #====================================================================
 printf "minify and copy styles...\n"
 #====================================================================
-    
+
 # header with macro
 header=\
 'title: '${pluginPrefix}/vis.css'
@@ -124,6 +124,7 @@ printf "update version information...\n"
 
 version="$(cd "$visSrcPath" && git describe --tags $(git rev-list --tags --max-count=1))"
 version=${version:1}
+version=`expr match "$version" '[^0-9]*\([0-9\.]*\)'` # clean any prefix or suffix
 printf "using Vis.js version $version\n"
 expr="s/\"version\": \"[^\"]*\"/\"version\": \"$version\"/g"
 
